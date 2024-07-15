@@ -73,7 +73,7 @@ app.use(cors({
 
 
 
-mongoose.connect('mongodb://localhost:27017/pfe', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://admin:adminpfe@cluster0.5vqae.mongodb.net/pfe?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 //securite configuration
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -143,7 +143,7 @@ app.post("/api/addUser", multer({ storage: storage }).single('img'), (req, res) 
 
 
         let user = {};
-        
+
         if (req.body.role == "teacher") {
 
 
@@ -176,7 +176,7 @@ app.post("/api/addUser", multer({ storage: storage }).single('img'), (req, res) 
                     pass: 'partnerhdi'
                 }
             });
-        
+
             var mailOptions = {
                 from: 'ajmiaziz109@gmail.com',
                 to: req.body.email,
@@ -185,9 +185,9 @@ app.post("/api/addUser", multer({ storage: storage }).single('img'), (req, res) 
                     'Nous vous remercions pour votre confiance et pour votre fidélité..:\n\n' +
                     '.\n\n' +
                     '..\n'
-        
+
             };
-        
+
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     console.log(error);
@@ -223,7 +223,7 @@ app.post("/api/addUser", multer({ storage: storage }).single('img'), (req, res) 
                     pass: 'partnerhdi'
                 }
             });
-        
+
             var mailOptions = {
                 from: 'ajmiaziz109@gmail.com',
                 to: req.body.email,
@@ -232,9 +232,9 @@ app.post("/api/addUser", multer({ storage: storage }).single('img'), (req, res) 
                     'Nous vous remercions pour votre confiance et pour votre fidélité..:\n\n' +
                     '.\n\n' +
                     '..\n'
-        
+
             };
-        
+
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     console.log(error);
@@ -258,19 +258,19 @@ app.post("/api/addUser", multer({ storage: storage }).single('img'), (req, res) 
 
         }
 
-        user.save();//save lel user 
+        user.save();//save lel user
 
         res.status(200).json({
             message: "User created"
 
         })
 
-      
 
-        
+
+
 
     })
-     
+
 
 
 
@@ -479,7 +479,7 @@ app.put("/api/updatestatus/:id", (req, res) => {
             }
         }
     )
-    
+
 
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -549,7 +549,7 @@ app.post("/api/addgroup", (req, res) => {
 
 
 
-    group.save();//save lel user 
+    group.save();//save lel user
 
     res.status(200).json({
         message: "group has been created"
@@ -565,7 +565,7 @@ app.post("/api/addgroup", (req, res) => {
 
 });
 
-//login 
+//login
 
 app.post("/api/login", (req, res) => {
     console.log("Here in login", req.body);
@@ -596,7 +596,7 @@ app.post("/api/login", (req, res) => {
                         findedUser: "Wrong password" //yrajaalek msg hedheka //
                     });
                 }
-                //si non yrajaalek ojet kol 
+                //si non yrajaalek ojet kol
                 else {
 
                     User.findOne({ email: req.body.email }).then(
@@ -613,9 +613,9 @@ app.post("/api/login", (req, res) => {
 
         })
 
-        
 
-        
+
+
 
 
 
@@ -720,7 +720,7 @@ app.post("/api/addconges", multer({
 
 
 
-    conges.save();//save lel user 
+    conges.save();//save lel user
 
     res.status(200).json({
         message: "conges has been created"
@@ -917,7 +917,7 @@ app.post("/api/addpay", (req, res) => {
 
 
 
-    paiment.save();//save lel user 
+    paiment.save();//save lel user
 
     res.status(200).json({
         message: "pay created"
@@ -1085,7 +1085,7 @@ app.post("/api/addcour", multer({
 
 
 
-    cour.save();//save lel user 
+    cour.save();//save lel user
 
     res.status(200).json({
         message: "course created"
@@ -1235,7 +1235,7 @@ app.post("/api/addsubject", (req, res) => {
                     message: "Module exist"
                 })
             } else {
-                subject.save();//save lel user 
+                subject.save();//save lel user
 
                 res.status(200).json({
                     message: "subject  created"
@@ -1260,7 +1260,7 @@ app.post("/api/addsubject", (req, res) => {
 
 });
 
-//get all modules    
+//get all modules
 
 app.get("/api/allmodules", (req, res) => {
 
@@ -1299,7 +1299,7 @@ app.get("/api/allmodules", (req, res) => {
 
 
 
-// create matiere 
+// create matiere
 app.post("/api/addmatiere", (req, res) => {
 
     console.log("here in create matiere", req.body);
@@ -1335,7 +1335,7 @@ app.post("/api/addmatiere", (req, res) => {
                     message: "matiere exist"
                 })
             } else {
-                matiere.save();//save lel user 
+                matiere.save();//save lel user
 
                 res.status(200).json({
                     message: "matiere create"
@@ -1421,7 +1421,7 @@ app.get("/paiments/generateFile/pdf", (req, res) => {
 
 
 
-           
+
 
 
             const table = {
@@ -1431,7 +1431,7 @@ app.get("/paiments/generateFile/pdf", (req, res) => {
                     "mode",
                     "tranche",
                     "Avance",
-                    
+
                     "total"
 
                 ],
@@ -1445,7 +1445,7 @@ app.get("/paiments/generateFile/pdf", (req, res) => {
                     paiment.mode,
                     paiment.tranche,
                     paiment.Advance,
-                    
+
                     paiment.Price,
 
 
@@ -1537,8 +1537,8 @@ app.get("/payments/generateFile/pdf/:id", (req, res) => {
                   "mode",
                   "Total",
                   "Avance",
-                  
-  
+
+
                 ],
                 rows: [],
               };
@@ -1553,12 +1553,12 @@ app.get("/payments/generateFile/pdf/:id", (req, res) => {
                 doc.mode,
                 doc.Price,
                 doc.Advance,
-                
-  
-  
-  
-  
-  
+
+
+
+
+
+
               ]);
               // }
               // Draw the table
@@ -1573,7 +1573,7 @@ app.get("/payments/generateFile/pdf/:id", (req, res) => {
           console.log("error in DB");
         }
       });
-  
+
   });
 
 
@@ -2193,7 +2193,7 @@ app.post("/api/addonline", (req, res) => {
 
 });
 
-// create online course 
+// create online course
 app.post("/api/addcourseonline", multer({
     storage: storage
 }).single('img'), (req, res) => {
@@ -2231,7 +2231,7 @@ app.post("/api/addcourseonline", multer({
 
 
 
-    courseonline.save();//save lel user 
+    courseonline.save();//save lel user
 
     res.status(200).json({
         message: "course has been created"
@@ -2251,7 +2251,7 @@ app.post("/api/addcourseonline", multer({
 
 
 
-//get all course online    
+//get all course online
 
 app.get("/api/allcourseonline", (req, res) => {
 
@@ -2334,7 +2334,7 @@ app.post("/api/addevent", (req, res) => {
 
 
 
-    event.save();//save lel user 
+    event.save();//save lel user
 
     res.status(200).json({
         message: "success"
